@@ -34,7 +34,7 @@ Essas questões serão o guia deste post, que tem por objetivo apresentar concei
 
 ### Regras de negócio em Domain-Driven Design
 
-No intuito de aproximar a linguagem de negócio ao design de software, Eric Evans[^1], propõe a criação de modelos de domínio ricos que representam um "conhecimento destilado" do negócio. Nesse sentido, Evans estabelece os modelos como "a espinha dorsal de uma linguagem utilizada por todos os membros da equipe".
+No intuito de aproximar a linguagem de negócio ao design de software, Eric Evans [^1], propõe a criação de modelos de domínio ricos que representam um "conhecimento destilado" do negócio. Nesse sentido, Evans estabelece os modelos como "a espinha dorsal de uma linguagem utilizada por todos os membros da equipe".
 
 [^1]: https://en.wikipedia.org/wiki/Domain-driven_design.
 
@@ -44,7 +44,7 @@ No entanto, a compreensão do que venha ser um modelo rico é muito abstrata e p
 ><sup>
 Pessoas novas no DDD tendem a modelar muitos comportamentos. Eles inocentemente acreditam na falácia de que o DDD trata 
 de modelar o mundo real. Posteriormente, eles tentam modelar muitos comportamentos do mundo real de uma entidade.</sup>  
->   **-Scott Millett e Nick Tune**[^2]
+>   **-Scott Millett e Nick Tune** [^2]
 
 [^2]: Livro: Patterns, Principles, and Practices of Domain-Driven Design.
 
@@ -78,36 +78,27 @@ A técnica de Especificação é um conceito poderoso em DDD. Contudo, é de cer
 
 ### Regras de negócio via Design By Contract
 
-As Especificações não são um conceito exclusivos de Evans/Fowler. Duas décadas antes da publicação do DDD, [Bertrand Meyer](https://en.wikipedia.org/wiki/Bertrand_Meyer), um mestre em engenharia pela _École Polytechnique_ em Paris, descreveu no capítulo **Design By Contract: Building Reliable Software** em seu livro **Object-Oriented: Software Construction**, como ampliar a confiabilidade (Reliability) de software utilizando uma abordagem chamada _Design by Contract_.
+As Especificações não são um conceito exclusivos de Evans/Fowler. Duas décadas antes da publicação do DDD, **Bertrand Meye** [ˆ3], um mestre em engenharia pela _École Polytechnique_ em Paris, descreveu no capítulo **Design By Contract: Building Reliable Software** em seu livro **Object-Oriented: Software Construction**, como ampliar a confiabilidade (Reliability) de software utilizando uma abordagem chamada _Design by Contract_.
 
-Em resumo, _Design by Contract_ aplica um conjunto de regras de relacionamento entre uma classe e seus clientes (consumidores da classe), como um contrato formal composto por pré-condições e pós-condições, que expressam pra cada parte seus direitos e obrigações. Essa relações se dá por **Especificações** que visam atender o aspecto de corretude (_correctness_) da confiabilidade. Para Meyer, "Uma Especificação se dá por **Asserções**, que são expressões que envolvem e declaram predicados sobre uma entidade, que satisfaçam alguma etapa de execução do software". As asserções podem ser representadas pela seguinte **Fórmula de corretude**:
+Em resumo, _Design by Contract_ aplica um conjunto de regras de relacionamento entre uma classe e seus clientes (consumidores da classe), como um contrato formal composto por pré-condições e pós-condições, que expressam pra cada parte seus direitos e obrigações. Essa relações se dá por **Especificações** que visam atender o aspecto de corretude (_correctness_) da confiabilidade. Para Meyer, "Uma Especificação se dá por **Asserções**, que são expressões que envolvem e declaram predicados sobre uma entidade, que satisfaçam alguma etapa de execução do software". As asserções podem ser representadas pela seguinte **Fórmula de corretude**: 
 
----
+```math 
+\{P\} A \{Q\}
+```
 
-{% katex %}
-\text{\textbraceleft P\textbraceright}
-\text{ A }
-\text{\textbraceleft Q\textbraceright} \\
-{% endkatex %}
+[^3]: https://en.wikipedia.org/wiki/Bertrand_Meyer
 
----
 
-Essa formula expressa que qualquer execução de **A**, iniciada em um estado mantido por **P**, será concluída em um
-estado mantido por **Q**. Vejamos o seguinte exemplo,
+Essa formula expressa que qualquer execução de **(${A}$)**, iniciada em um estado mantido por **(${P}$)**, será concluída em um
+estado mantido por **(${Q}$)**. Vejamos o seguinte exemplo,
 
----
+```math 
+\{x >= 9\} x := x + 5 \{x >=13\}
+```
 
-{% katex %}
-\text{\textbraceleft x >= 9\textbraceright}
-\text{ x := x + 5 }
-\text{\textbraceleft x >=13\textbraceright}
-{% endkatex %}
+Nesse exemplo, se **(${P}$)** representa um número **(${x}$)** maior ou igual a 9; e **(${A}$)** é função cujo resultado é uma soma de **(${x}$)** mais o número 5; então **(${Q}$)** representará um número **(${x}$)** igual ou superior ao número 13. Nessa perspectiva, **(${P}$)** representa as **pré-condições** que expressam as condições sobre as quais uma rotina deve funcionar apropriadamente; enquanto **(${Q}$)** representa as **pós-condições**, as quais expressam o estado resultante da rotina executada.
 
----
-
-Nesse exemplo, se **P** é um número qualquer (x) maior ou igual a 9; e **A** é função cujo resultado é uma soma desse número mais o número 5; então **Q** será um número igual ou superior ao número 13. Nessa perspectiva, **"P"** representa as **pré-condições** que expressam as condições sobre as quais uma rotina deve funcionar apropriadamente; enquanto **"Q"** representa as **pós-condições**, as quais expressam o estado resultante da rotina executada.
-
-Ainda sobre pré-condições, Meyer afirma que elas são uma **obrigação** para o cliente e um benefício para o fornecedor. Já as pós-condições, são compreendidas como benefício para o cliente e uma obrigação para o fornecedor.
+Ainda sobre pré-condições, Meyer afirma que elas são uma **obrigação** para o cliente e um **benefício** para o fornecedor. Já as pós-condições, são compreendidas como benefício para o cliente e uma obrigação para o fornecedor.
 
 ## AVALIAÇÃO
 Esta seção discute a implementação de regras de negócio em sistemas de informação, destacando desafios associados ao paradigma imperativo e a importância de práticas como o uso de padrões de projeto e asserções para garantir a corretude e facilidade de manutenção.
@@ -116,20 +107,12 @@ Esta seção discute a implementação de regras de negócio em sistemas de info
 
 A resposta para essa questão está intimamente ligada as linguagens, técnicas e recursos adotados pelos programadores. Numa perspectiva geral, entendo que boa parte das principais linguagens na indústria como C, Java, Python, C# tem um forte traço no paradígma Inperativo.
 
----
-<div>
-<center>
-<strong>💡SAIBA MAIS</strong>
-<br/>
-<small>
-As linguagens imperativas são construídas em torno do conceito de mutação de estado e controle de fluxo. 
+> [!TIP]
+> <sup>As linguagens imperativas são construídas em torno do conceito de mutação de estado e controle de fluxo. 
 Isso significa que os programas escritos em linguagens imperativas geralmente modificam seus estados através 
 de atribuições a variáveis e usam estruturas de controle como loops (for, while) e condicionais (if-else) para 
-controlar a ordem de execução das instruções.
-</small>
-</center>
-</div>
----
+controlar a ordem de execução das instruções</sup>.
+
 
 Apesar de uma parte dessas linguagens oferecerem suporte a outros paradígmas, o traço imperativo ainda tem muita influência sobre como os desenvolvedores escrevem seus programas. O **Código 2**, ilustrar um exemplo desse tipo de programação.
 
@@ -191,7 +174,7 @@ public class OrderRegistrationUseCase
     }
 }
 ```
-<p><small><b>Código 2.</b> código imperativo</small></p>
+<sup>**Código 2.** código imperativo</sup>
 
 O código C# apresentado anteriormente ilustra uma aplicação da _Vineyard_, uma loja fictícia especializada na venda de vinhos importados. Nesse código há uma classe chamada `OrderRegistrationUseCase` que implementa o método `RegisterOrder(OrderRegistation command)`, cuja responsabilidade é registrar a entidade `Order`. Para isso o serviço faz uso das seguintes regras:
 
@@ -207,17 +190,10 @@ O código C# apresentado anteriormente ilustra uma aplicação da _Vineyard_, um
 
 Apesar de ilustrativo, esse código baseia-se em uma implementação real, na qual as regras de negócio estão escritas de forma imperativa no código. Isso não é algo raro, e pode ser identificado em diversos sistemas, de diferentes domínios. Nesse tipo de implementação as origens e motivações das regras de negócio que foram parar no código-fonte estão ocultas, possivelmente perdida em algum artefato estático ou na mente de algum especialista.
 
----
-<div>
-<center>
-<strong>🤔 OPINIÃO</strong>
-<br/>
-<small>
-Particularmente, enxergo o código-fonte para além de um conjunto de instruções de máquina. Ao meu ver ele deveria ser compreendido como um artefato de comunicação entre desenvolvedores na etapa de codificação. Gosto de pensar, que dentre todos os artefatos do ciclo de vida de desenvolvimento de software, o código-fonte é um dos mais dinâmicos. Talvez essas ideias sejam influenciadas por meu apreço por um movimento no qual muitos dos artefatos da engenharia de software são "as a code". 
-</small>
-</center>
-</div>
----
+
+> [!IMPORTANT]
+><sup> Particularmente, enxergo o código-fonte para além de um conjunto de instruções de máquina. Ao meu ver ele deveria ser compreendido como um artefato de comunicação entre desenvolvedores na etapa de codificação. Gosto de pensar, que dentre todos os artefatos do ciclo de vida de desenvolvimento de software, o código-fonte é um dos mais dinâmicos. Talvez essas ideias sejam influenciadas por meu apreço por um movimento no qual muitos dos artefatos da engenharia de software são "as a code". </sup>
+
 
 ### Quais práticas podem ser adotadas para codificar regras de forma a garantir a sua corretude?
 
@@ -227,6 +203,8 @@ Nesta seção ilustraremos o uso de algumas práticas para codificar regras de n
 - Asserções não são estruturas de controle;
 - Use Asserções para escrever softwares corretos;
 - Use Asserções para documentação;
+
+<br/>
 
 #### Asserções não são mecanismos para validar inputs
 
@@ -351,7 +329,10 @@ Após essas pequenas mudanças, o **Código 5** encontra-se bem diferente do **C
 
 #### Use Asserções para escrever softwares corretos
 
-Com as extrações relaizadas na classe `OrderRegistrationUseCase`, foi possível remover as estruturas de controle que estavam no corpo do método, promovendo uma melhor legibilidade ao código. O próximo passo é isolar as Asserções da classe `OrderRegistrationUseCase`, tornando-as mais atômicas, reutilizáveis e passíveis de teste.Para isso, será adotado o [Business Rule Pattern](https://www.pluralsight.com/courses/c-sharp-design-patterns-rules-pattern), proposto por [Steve Smith](https://ardalis.com/blog). Estes são algums pontos importantes a serem observadas sobre o _pattern_:
+Com as extrações relaizadas na classe `OrderRegistrationUseCase`, foi possível remover as estruturas de controle que estavam no corpo do método, promovendo uma melhor legibilidade ao código. O próximo passo é isolar as Asserções da classe `OrderRegistrationUseCase`, tornando-as mais atômicas, reutilizáveis e passíveis de teste.Para isso, será adotado o **Business Rule Pattern** [^4], proposto por **Steve Smith** [ˆ5]. Estes são algums pontos importantes a serem observadas sobre o _pattern_:
+
+[^4]: Business Rule Pattern - https://www.pluralsight.com/courses/c-sharp-design-patterns-rules-pattern)
+[^5]: Steve Smith - https://ardalis.com/blog
 
 - Cada regra deve seguir o **Single Responsibility Principle**.
 - Para garantir que a regra siga o Princípio da Responsabilidade Única, tenha em mente o Princípio **KISS**!
