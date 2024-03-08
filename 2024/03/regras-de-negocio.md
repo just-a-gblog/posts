@@ -1,17 +1,15 @@
 # Do Conceito à Codificação: Transformando Regras de Negócio em Códigos Confiáveis
 
 
-**YAN JUSTINO**
-[MSc. Software Engineering](https://repositorio.ufrn.br/handle/123456789/26370) · [PhD. Student](https://www.cesar.school/doutorado-profissional-em-engenharia-de-software/)
-[AWS](https://www.youracclaim.com/users/yan-justino/badges) · [MCSD](https://www.youracclaim.com/users/yan-justino/badges) · [OCA](https://www.youracclaim.com/users/yan-justino/badges) · [ORCID](https://orcid.org/0000-0001-7248-716X)  · [Tech Lead at ITAÚ Unibanco]()
+**YAN JUSTINO**  
+[MSc. Software Engineering](https://repositorio.ufrn.br/handle/123456789/26370) · [PhD. Student](https://www.cesar.school/doutorado-profissional-em-engenharia-de-software/)  
+[AWS](https://www.youracclaim.com/users/yan-justino/badges) · [OCA](https://www.youracclaim.com/users/yan-justino/badges) · [ORCID](https://orcid.org/0000-0001-7248-716X) · [Tech Lead at ITAÚ Unibanco]()
 
 ![Static Badge](https://img.shields.io/badge/post-design-50A6C5?style=for-the-badge)
 
-----
 
-> As fronteiras da minha linguagem são as fronteiras do meu universo - **Ludwig Wittgenstein**.
-
-----
+> As fronteiras da minha linguagem são as fronteiras do meu universo  
+> **-Ludwig Wittgenstein**.
 
 
 ## CONTEXTO
@@ -26,9 +24,9 @@ No entanto, a automatização de regras de negócio em sistemas de informação 
 
 Comparando as exigências de qualidade sobre sistemas de informação com as práticas de desenvolvimento de software devemos nos questionar:
  
-- _Como desenvolvedores implementam regras de negócio nos sistemas de informação?_
-- _Quais práticas podem ser adotadas para codificar regras de forma a garantir a sua corretude?_
-- _Quais as estratégias a equipe de desenvolvimento adota para gerenciar o ciclo de vida das regras no sistema?_
+1. _Como desenvolvedores implementam regras de negócio nos sistemas de informação?_
+2. _Quais práticas podem ser adotadas para codificar regras de forma a garantir a sua corretude?_
+3. _Quais as estratégias a equipe de desenvolvimento adota para gerenciar o ciclo de vida das regras no sistema?_
 
 Essas questões serão o guia deste post, que tem por objetivo apresentar conceitos e práticas de design desoftware que podem gerar insgihts valiosos para auxiliar desenvolvedores na modelagem, construção e manutenção de regras de negócio em sistemas de informação.
 
@@ -36,39 +34,25 @@ Essas questões serão o guia deste post, que tem por objetivo apresentar concei
 
 ### Regras de negócio em Domain-Driven Design
 
-No intuito de aproximar a linguagem de negócio ao design de software, [Eric Evans](https://en.wikipedia.org/wiki/Domain-driven_design), em _Domain-Driven Design_, propõe a criação de modelos de domínio ricos que representam um "conhecimento destilado" do negócio. Nesse sentido, Evans estabelece os modelos como "a espinha dorsal de uma linguagem utilizada por todos os membros da equipe".
+No intuito de aproximar a linguagem de negócio ao design de software, Eric Evans[^1], propõe a criação de modelos de domínio ricos que representam um "conhecimento destilado" do negócio. Nesse sentido, Evans estabelece os modelos como "a espinha dorsal de uma linguagem utilizada por todos os membros da equipe".
 
-No entanto, a compreensão do que venha ser um modelo rico é muito abstrata e pode ser repleta de equívocos. Um deles é pensar que um modelo rico se resume a uma espécie de contraste à modelos anêmicos (classes desprovidas de comportamento). Uma das consequências dessa visão restrita, é a construção de entidades excessivamente ricas em comportamentos. Segundo os autores do livro _Patterns, Principles, and Practices of Domain-Driven Design_:
+[^1]: https://en.wikipedia.org/wiki/Domain-driven_design.
 
----
-<div>
-<center>
-<strong>✍🏼 CITAÇÃO</strong>
-<br/>
-<small>
+No entanto, a compreensão do que venha ser um modelo rico é muito abstrata e pode ser repleta de equívocos. Um deles é pensar que um modelo rico se resume a uma espécie de contraste à modelos anêmicos (classes desprovidas de comportamento). Uma das consequências dessa visão restrita, é a construção de entidades excessivamente ricas em comportamentos.
+
+> [!IMPORTANT]
+><sup>
 Pessoas novas no DDD tendem a modelar muitos comportamentos. Eles inocentemente acreditam na falácia de que o DDD trata 
-de modelar o mundo real. Posteriormente, eles tentam modelar muitos comportamentos do mundo real de uma entidade.
-<br/>
-<strong>Scott Millett e Nick Tune</strong>
-</small>
-</center>
-</div>
----    
+de modelar o mundo real. Posteriormente, eles tentam modelar muitos comportamentos do mundo real de uma entidade.</sup>  
+>   **-Scott Millett e Nick Tune**[^2]
 
+[^2]: Livro: Patterns, Principles, and Practices of Domain-Driven Design.
 
 Evans ainda afirma que "as regras de um negócio geralmente não se enquadram na responsabilidade de uma Entidade ou Objeto de valor", uma vez que elas "podem sobrecarregar o significado básico do objeto do domínio". No entanto, ele reitera que 'retirar as regras da camada de domínio é ainda pior'". Para resolver esse impasse, Evans, toma "emprestado o conceito de predicados e cria objetos especializados que avaliam e fornecem como resposta um resultado booleano".
 
----
-<div>
-<center>
-<strong>💡SAIBA MAIS</strong>
-<br/>
-<small>
-Os conceitos de predicado e resultados booleanos remontam um movimento filosófico-matemático do início do século XX chamado de Virada Linguística. Nesse período, os filósofos adotaram a linguagem como foco central de suas investigações. Pensadores como Frege, Russel e Wittgentein, fazendo uso da lógica e da matemática, procuraram uma abordagem formal para explicar e abstrair os fenômenos linguísticos. Esses estudos têm grande influência sobre como hoje concebemos linguagens de programação de alto nível.
-</small>
-</center>
-</div>
----  
+> [!TIP]
+><sup>
+Os conceitos de predicado e resultados booleanos remontam um movimento filosófico-matemático do início do século XX chamado de Virada Linguística. Nesse período, os filósofos adotaram a linguagem como foco central de suas investigações. Pensadores como Frege, Russel e Wittgentein, fazendo uso da lógica e da matemática, procuraram uma abordagem formal para explicar e abstrair os fenômenos linguísticos. Esses estudos têm grande influência sobre como hoje concebemos linguagens de programação de alto nível.</sup>
 
 Esses objetos são denominados de **Especificações** e representam predicados que determinam se o objeto satisfaz ou não alguns critérios. O **Código 1** ilustra uma especificação da lógica se o cliente é maior de idade. Ao extrair essa lógica para uma classe própria, amplia-se a expressividade, uma vez que o escopo da classe aponta para um único conceito; amplia-se também a testabilidade, já que essa estrutura possui poucas dependências para ser validada.
 
@@ -84,7 +68,7 @@ public class LegalAgeSpecification: ISpecification<Customer>
        entity.CalculateAge() >= 18;
 }
 ```
-<p><small><b>Código 1.</b> modelo de especificação em C#</small></p>
+<sup>**Código 1.** modelo de especificação em C#<sup>
 
 
 A técnica de Especificação é um conceito poderoso em DDD. Contudo, é de certa forma frustrante ver como ela é ocultada no high level conceitual do design. Na visão de blocos de construção do DDD (ver Figura 1) ela não é destacada como os demais conceitos de modelo de domínio. Em seu livro, Evans optou por associar a técnica ao conceito de Objetos de Valor. Demais autores como Vaughn Vernon, Scott Millet e Nick Tune o seguiram nessa mesma linha.
